@@ -6,6 +6,7 @@ export const COLORS = {
   gray: '#F3F3F3',
   white: '#FFFFFF',
   black: '#000',
+  red:"#f00"
 };
 export const ICONS = {
   xsIcon: RFValue(10) ,

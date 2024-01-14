@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import Reusabletextinput from "../components/AppTextinput";
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
-import { COLORS, FONTS, PADDINGS, RADIUS } from "../constants/Constants";
+import { COLORS, FONTS, ICONS, MARGIN, PADDINGS, RADIUS } from "../constants/Constants";
 import DecreaseAndIncrease from "../components/AppDecreaseAndIncrease";
 import SwitchSelectorComponent from "../components/SwitchSelctor";
 import ProgressBar from 'react-native-progress/Bar'
@@ -11,6 +11,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 import RBSheet from "@lunalee/react-native-raw-bottom-sheet";
 import { requestCameraPermission } from "../utils/CameraPermissin";
 import GeneralButton from "../components/GeneralButton";
+import FontAwesome from "react-native-vector-icons/FontAwesome"
 const Task = () => {
     useEffect(() => {
         requestCameraPermission()
@@ -23,6 +24,7 @@ const Task = () => {
     const [unitSize, setUnitSize] = useState("")
     const [elecMeter, setElecMeter] = useState("")
     const [waterMeter, setWaterMeter] = useState("")
+    const [photosArr, setPhotosArr] = useState([]);
     const furnishedOptions = [
         { label: "Yes", value: "Yes" },
         { label: "No", value: "No" }
@@ -41,14 +43,12 @@ const Task = () => {
         { label: "Window", value: "Window" },
         { label: "Not Installed", value: "Not Installed" }
     ]
-    const [photosArr, setPhotosArr] = useState([]);
-
     const refRBSheet = useRef();
     const selectFromGallery = () => {
         ImagePicker.openPicker({
             multiple: true
         }).then(images => {
-            console.log(images);
+            setPhotosArr(photosArr => [...images, ...photosArr,])
         });
     };
     const launchCamera = () => {
@@ -57,9 +57,27 @@ const Task = () => {
             height: 400,
             cropping: true,
         }).then(image => {
-            console.log(image);
+            setPhotosArr(photosArr => [image, ...photosArr])
         });
     };
+    const deletPhoto = (index) => {
+        let arr = [...photosArr]
+        arr.splice(index, 1)
+        setPhotosArr(photosArr => arr)
+    }
+    const renderImages = () => {
+        return photosArr.map((item, index) => {
+            return (
+                <View style={styles.eachChosenImageViewStyle} key={index}>
+                    <ImageBackground style={styles.eachChosenImageStyle} source={{uri:item.path}}>
+                        <TouchableOpacity onPress={() => { deletPhoto(index) }}
+                            style={styles.trashButtonStyle} >
+                            <FontAwesome name="trash" color={COLORS.red} size={ICONS.smIcon} />
+                        </TouchableOpacity>
+                    </ImageBackground>
+                </View>)
+        })
+    }
 
     return (
         <>
@@ -121,19 +139,31 @@ const Task = () => {
                         <Reusabletextinput placeholder="Enter meter no" headerText="Water Meter No." onChangeText={(value) => { /^[0-9]*$/.test(value) ? setWaterMeter(value) : null }} value={waterMeter} />
                     </View>
                     <View style={styles.generalPaddingVertical}>
-                        <SwitchSelectorComponent options={acOptions} headerText="Select AC Type" onPress={value => console.log(`Call onPress with value: ${value}`)} />
+                        <SwitchSelectorComponent options={acOptions} headerText="Select AC Type"  />
                     </View>
                     <Text style={styles.generalPaddingVertical} >Upload Photo</Text>
                     {/* photo part  */}
                     <View style={styles.uploadImageContainer}>
+                        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ width: photosArr.length === 0 ? "100%" : null }}>
+                            <View style={styles.photesContainer}>
+                                {photosArr.length > 0 ? renderImages() : null}
+                                <View style={[styles.addImageStyle, { width: photosArr.length > 0 ? RFValue(250) : "100%" }]}>
+                                    <TouchableOpacity onPress={() => { refRBSheet.current.open() }}>
+                                        <FontAwesome name="image" size={ICONS.xxlIcon} />
+                                    </TouchableOpacity>
+                                </View>
+
+                            </View>
+                        </ScrollView>
 
                     </View>
+
                     <View style={styles.eachGroupContainer}>
-                        <View style={styles.cardsWidth}>
-                            <GeneralButton buttonText="Back" btnBgColor={COLORS.white} textBgColor={COLORS.green} />
+                        <View style={[styles.cardsWidth, styles.generalPaddingVertical]}>
+                            <GeneralButton buttonText="Back" btnBgColor={COLORS.gray} textBgColor={COLORS.green} />
 
                         </View>
-                        <View style={styles.cardsWidth}>
+                        <View style={[styles.cardsWidth, styles.generalPaddingVertical]}>
                             <GeneralButton buttonText="Next" btnBgColor={COLORS.green} textBgColor={COLORS.white} />
 
                         </View>
@@ -232,6 +262,33 @@ const styles = StyleSheet.create({
         borderWidth: RFValue(1),
         borderColor: COLORS.gray,
         borderRadius: RADIUS.xsRadius,
-        marginBottom: 15
+        marginBottom: MARGIN.smMargin,
+    }, photesContainer: {
+        display: "flex", flexDirection: "row"
+    }, addImageStyle: {
+        height: "100%",
+        backgroundColor: COLORS.gray,
+        alignItems: "center",
+        justifyContent: "center",
+        display: "flex"
+    }, eachChosenImageViewStyle: {
+        height: "100%",
+        width: RFValue(170)
+    }, eachChosenImageStyle: {
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "flex-end"
+
+    }, trashButtonStyle: {
+        width: RFValue(20),
+        height: RFValue(20),
+        borderRadius: RADIUS.smRadius,
+        backgroundColor: COLORS.white,
+        margin: MARGIN.smMargin,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
     }
 })

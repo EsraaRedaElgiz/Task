@@ -15,7 +15,8 @@ function GeneralButton(props) {
     return (
         <TouchableOpacity
             {...rest}
-            style={[styles.buttonStyle,{backgroundColor:btnBgColor}]}>
+            style={[styles.buttonStyle,{backgroundColor:btnBgColor,borderColor: btnBgColor,
+            }]}>
 
             <Text style={[styles.textStyle,{color:textBgColor}]}>{buttonText}</Text>
         </TouchableOpacity>
@@ -26,7 +27,6 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.green,
         borderRadius: RADIUS.xsRadius,
         borderWidth: RFValue(1),
-        borderColor: COLORS.blue,
         justifyContent: 'center',
         alignItems: 'center',
         height: RFValue(40),

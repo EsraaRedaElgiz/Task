@@ -39,7 +39,10 @@ const styles = StyleSheet.create({
 
     },
     headerStyle: {
-        paddingBottom: PADDINGS.smPadding
+        paddingBottom: PADDINGS.smPadding,
+        color:COLORS.gray,
+        fontWeight:"bold"
+
     }
 });
 export default SwitchSelectorComponent;

@@ -178,11 +178,11 @@ const Task = () => {
             // error reading value
         }
     }
-    
+
     return (
         <>
             {isLoading ?
-                (<View style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                (<View style={styles.containerLoading}>
                     <ActivityIndicator size={ICONS.xlIcon} color={COLORS.green} />
                 </View>) :
                 (
@@ -247,14 +247,14 @@ const Task = () => {
                                 <View style={styles.generalPaddingVertical}>
                                     <SwitchSelectorComponent options={acOptions} headerText="Select AC Type" initialRender={acType} onPress={(value) => saveData("ac", value)} />
                                 </View>
-                                <Text style={styles.generalPaddingVertical} >Upload Photo</Text>
+                                <Text style={[styles.generalPaddingVertical, styles.textStyle]} >Upload Photo</Text>
                                 <View style={styles.uploadImageContainer}>
                                     <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ width: photosArr.length === 0 ? "100%" : null }}>
                                         <View style={styles.photesContainer}>
                                             {photosArr.length > 0 ? renderImages() : null}
                                             <View style={[styles.addImageStyle, { width: photosArr.length > 0 ? RFValue(250) : "100%" }]}>
                                                 <TouchableOpacity onPress={() => { refRBSheet.current.open() }}>
-                                                    <FontAwesome name="image" size={ICONS.xxlIcon} />
+                                                    <FontAwesome name="image" size={ICONS.xxlIcon} color={COLORS.black} />
                                                 </TouchableOpacity>
                                             </View>
 

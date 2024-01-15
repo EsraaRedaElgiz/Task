@@ -14,7 +14,7 @@ function DecreaseAndIncrease(props) {
                 <TouchableOpacity style={styles.buttonStyle} onPress={decrease}>
                     <FontAwesome name="minus" color={COLORS.black} />
                 </TouchableOpacity>
-                <Text>{number}</Text>
+                <Text style={styles.textStyle}>{number}</Text>
                 <TouchableOpacity style={styles.buttonStyle} onPress={increase}>
                     <FontAwesome name="plus" color={COLORS.black} />
                 </TouchableOpacity>
@@ -28,7 +28,9 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     headerStyle: {
-        paddingBottom: PADDINGS.smPadding
+        paddingBottom: PADDINGS.smPadding,
+        color:COLORS.gray,
+        fontWeight:"bold"
     },
     coniatnerStyle: {
         width: "100%",
@@ -50,6 +52,8 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.gray,
         width: "20%",
         height: "100%"
+    },textStyle:{
+        color:COLORS.black
     }
 });
 export default DecreaseAndIncrease;

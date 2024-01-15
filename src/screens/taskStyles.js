@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
         width: '90%',
     },
     eachOptionInBottonTab: {
-       alignItems:"center",
-       justifyContent:"center"
+        alignItems: "center",
+        justifyContent: "center"
     },
     optionTextStyle: {
         fontSize: FONTS.h7,
@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
         borderRadius: RADIUS.xsRadius,
         marginBottom: MARGIN.smMargin,
     }, photesContainer: {
-        display: "flex", flexDirection: "row"
+        display: "flex",
+        flexDirection: "row"
     }, addImageStyle: {
         height: "100%",
         backgroundColor: COLORS.gray,
@@ -71,6 +72,15 @@ const styles = StyleSheet.create({
         borderRadius: RADIUS.smRadius,
         backgroundColor: COLORS.white,
         margin: MARGIN.smMargin,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+    }, textStyle: {
+        color: COLORS.gray,
+        fontWeight:"bold"
+
+    }, containerLoading: {
+        flex: 1,
         display: "flex",
         alignItems: "center",
         justifyContent: "center"

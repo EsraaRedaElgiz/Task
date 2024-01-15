@@ -3,7 +3,7 @@ import {RFValue} from 'react-native-responsive-fontsize';
 
 export const COLORS = {
   green: '#186F65',
-  gray: '#F3F3F3',
+  gray: '#D8D9DA',
   white: '#FFFFFF',
   black: '#000',
   red:"#f00"

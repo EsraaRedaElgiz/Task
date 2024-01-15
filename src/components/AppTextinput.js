@@ -37,7 +37,10 @@ const styles = StyleSheet.create({
     
   },
   headerStyle:{
-    marginBottom:RFValue(10)
+    marginBottom:RFValue(10),
+    color:COLORS.gray,
+    fontWeight:"bold"
+
   }
 });
 export default Reusabletextinput;

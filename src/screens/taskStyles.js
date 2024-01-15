@@ -34,12 +34,12 @@ const styles = StyleSheet.create({
         width: '90%',
     },
     eachOptionInBottonTab: {
-       
+       alignItems:"center",
+       justifyContent:"center"
     },
     optionTextStyle: {
-        fontSize: FONTS.h5,
-        color: COLORS.green,
-        fontWeight: '600',
+        fontSize: FONTS.h7,
+        color: COLORS.black,
     }, uploadImageContainer: {
         width: "100%",
         height: RFValue(150),

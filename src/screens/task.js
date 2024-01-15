@@ -178,7 +178,7 @@ const Task = () => {
             // error reading value
         }
     }
-
+    
     return (
         <>
             {isLoading ?
@@ -293,35 +293,33 @@ const Task = () => {
                             }}>
                             <TouchableOpacity
                                 onPress={() => {
+                                    refRBSheet.current.close();
+                                    selectFromGallery();
+                                }}
+                                style={styles.eachOptionInBottonTab}
+                            >
+                                <FontAwesome name="camera-retro" size={ICONS.xxlIcon} color={COLORS.black} />
+                                <Text style={styles.optionTextStyle}>upload image</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+
+                                onPress={() => {
                                     requestCameraPermission().then((res) => {
                                         if (res === "granted")
                                             launchCamera();
                                         else
                                             Alert.alert("", "You Don't Grant Camera")
-
                                     })
 
                                     refRBSheet.current.close();
                                 }}
                                 style={styles.eachOptionInBottonTab}
                             >
-                                <Text style={styles.optionTextStyle}>التقاط صوره</Text>
+                                <FontAwesome name="image" size={ICONS.xxlIcon} color={COLORS.black} />
+                                <Text style={styles.optionTextStyle} >open camera</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => {
-                                    refRBSheet.current.close();
-                                    selectFromGallery();
-                                }}
-                                style={styles.eachOptionInBottonTab}
-                            >
-                                <Text style={styles.optionTextStyle} >اختيار صوره</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => refRBSheet.current.close()}
-                                style={styles.eachOptionInBottonTab}
-                            >
-                                <Text style={styles.optionTextStyle} >انهاء</Text>
-                            </TouchableOpacity>
+
                         </RBSheet>
                     </>)
             }

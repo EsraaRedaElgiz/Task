@@ -7,7 +7,7 @@ const App = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={COLORS.white} />
+      <StatusBar backgroundColor={COLORS.white} barStyle={"dark-content"}/>
       <Task />
     </>
   );

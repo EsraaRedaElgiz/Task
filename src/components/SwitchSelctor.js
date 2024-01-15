@@ -1,19 +1,19 @@
 import React from 'react';
-import { View, TextInput, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import SwitchSelector from "react-native-switch-selector";
 import { COLORS, PADDINGS, RADIUS } from '../constants/Constants';
 
 function SwitchSelectorComponent(props) {
-    const { options, headerText, onPress, ...rest } = props;
+    const { options, headerText, onPress,initialRender, ...rest } = props;
     return (
         <View style={styles.container}>
             <Text style={styles.headerStyle}>{headerText}</Text>
             <View style={styles.switchContainer}>
                 <SwitchSelector
                     options={options}
-                    initial={0}
+                    initial={initialRender}
                     onPress={onPress}
                     borderColor={COLORS.gray}
                     selectedColor={COLORS.white}

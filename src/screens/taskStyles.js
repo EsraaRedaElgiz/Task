@@ -34,10 +34,7 @@ const styles = StyleSheet.create({
         width: '90%',
     },
     eachOptionInBottonTab: {
-        width: '100%',
-        height: RFValue(50),
-        alignItems: 'center',
-        justifyContent: 'center',
+       
     },
     optionTextStyle: {
         fontSize: FONTS.h5,

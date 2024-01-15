@@ -14,9 +14,9 @@ export const requestCameraPermission = async () => {
       },
     );
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log('You can use the camera');
+      return "granted";
     } else {
-      console.log('Camera permission denied');
+      return "denied";
     }
   } catch (err) {
     console.warn(err);
